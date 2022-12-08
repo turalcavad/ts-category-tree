@@ -3,18 +3,31 @@
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	gap: 10px;
+	gap: 0.5em;
 }
 
 body {
 	font-family: Calibri, Segoe, "Segoe UI", "Gill Sans", "Gill Sans MT",
 		sans-serif;
+	background-color: #f5f7fb;
 }
 
 input {
 	border: none;
 	outline: none;
 	text-align: center;
+	background: transparent;
+}
+
+#categories {
+	background-color: #fff !important;
+}
+
+.parent {
+	background-color: #ffa376;
+}
+.sub {
+	background-color: blue;
 }
 
 .tree,
@@ -42,7 +55,6 @@ input {
 	padding: 0.5em 0;
 	vertical-align: top;
 }
-/* _________ */
 .tree li:before {
 	outline: solid 1px #666;
 	content: "";
@@ -58,18 +70,16 @@ input {
 	right: 50%;
 }
 
-.tree code,
 .tree .category {
-	border: solid 0.1em #666;
-	border-radius: 0.2em;
+	border: 1px solid #666;
+	border-radius: 0.4em;
 	display: inline-block;
 	margin: 0 6.2em 0.5em;
-	padding: 0.2em 0.5em;
+	padding: 0.5em 1.4em;
 	position: relative;
 }
 
 .tree ul:before,
-.tree code:before,
 .tree .category:before {
 	outline: solid 1px #666;
 	content: "";
@@ -89,7 +99,6 @@ input {
 }
 .tree > li:before,
 .tree > li:after,
-.tree > li > code:before,
 .tree > li > .category:before {
 	outline: none;
 }

@@ -1,25 +1,45 @@
 import React from "react";
 import classes from "./index.module.css";
-import AddIcon from "@mui/icons-material/Add";
 import ClearIcon from "@mui/icons-material/Clear";
 import CheckIcon from "@mui/icons-material/Check";
 import { useAppDispatch } from "../../hooks";
 import { categoryActions } from "../../store/categorySlice";
+import { CategoryNode } from "../../data";
 
 type Props = {
 	categoryId: number;
+	categoryName: string;
+	parentId: number;
 };
 
-const CreationActions: React.FC<Props> = ({ categoryId }) => {
+const CreationActions: React.FC<Props> = ({
+	categoryId,
+	categoryName,
+	parentId,
+}) => {
 	const dispatch = useAppDispatch();
 	const submitCategoryHandler = () => {
-		dispatch(categoryActions.submitCategory(categoryId));
+		dispatch(
+			categoryActions.submitCategory({
+				categoryId: categoryId,
+				categoryName: categoryName,
+			})
+		);
+	};
+
+	const cancelHandler = () => {
+		dispatch(
+			categoryActions.removeCategory({
+				parentId: parentId,
+				categoryId: categoryId,
+			})
+		);
 	};
 
 	return (
 		<div className={classes.wrapper}>
 			<div className={`${classes.icon} ${classes.cancel}`}>
-				<ClearIcon fontSize="inherit" />
+				<ClearIcon onClick={cancelHandler} fontSize="inherit" />
 			</div>
 			<div className={`${classes.icon} ${classes.submit}`}>
 				<CheckIcon onClick={submitCategoryHandler} fontSize="inherit" />

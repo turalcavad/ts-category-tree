@@ -9,18 +9,9 @@ interface State {
 const initialCategoryState: State = {
 	categories: {
 		id: 1,
-		children: [
-			{
-				id: 2,
-				children: [],
-				isCreated: true,
-			},
-			{
-				id: 3,
-				children: [],
-				isCreated: true,
-			},
-		],
+		parentId: 0,
+		name: "Categories",
+		children: [],
 		isCreated: true,
 	},
 };
@@ -30,17 +21,40 @@ const categorySlice = createSlice({
 	initialState: initialCategoryState,
 	reducers: {
 		addCategory: (state, { payload }: PayloadAction<number>) => {
-			const parentCategory = findCategory(state.categories, payload);
+			const parentId = payload;
+			const parentCategory = findCategory(state.categories, parentId);
 			const newCategory = {
-				id: Math.random().toFixed(4),
+				id: Math.random(),
 				children: [],
 				isCreated: false,
+				parentId: parentId,
 			};
 			parentCategory.children = [...parentCategory.children, newCategory];
 		},
-		submitCategory: (state, { payload }: PayloadAction<number>) => {
-			const category = findCategory(state.categories, payload);
+		submitCategory: (
+			state,
+			{ payload }: PayloadAction<{ categoryId: number; categoryName: string }>
+		) => {
+			const category = findCategory(state.categories, payload.categoryId);
 			category.isCreated = true;
+			category.name = payload.categoryName;
+		},
+		removeCategory: (
+			state,
+			{ payload }: PayloadAction<{ parentId: number; categoryId: number }>
+		) => {
+			const parentCategory = findCategory(state.categories, payload.parentId);
+
+			parentCategory.children = parentCategory.children.filter(
+				(c: CategoryNode) => c.id !== payload.categoryId
+			);
+		},
+		editCategory: (
+			state,
+			{ payload }: PayloadAction<{ categoryId: number; newName: string }>
+		) => {
+			const category = findCategory(state.categories, payload.categoryId);
+			category.isCreated = false;
 		},
 	},
 });
