@@ -18,6 +18,9 @@ const CreationActions: React.FC<Props> = ({
 }) => {
 	const dispatch = useAppDispatch();
 	const submitCategoryHandler = () => {
+		console.log(categoryName);
+		if (categoryName === undefined) return;
+
 		dispatch(
 			categoryActions.submitCategory({
 				categoryId: categoryId,

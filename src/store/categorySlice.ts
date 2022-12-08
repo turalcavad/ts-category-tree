@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CategoryNode } from "../data";
+import { CategoryNode } from "../models/category";
 import { findCategory } from "../helpers/findCategory";
 
 interface State {
 	categories: CategoryNode;
+	inProgress: boolean;
 }
 
 const initialCategoryState: State = {
@@ -14,6 +15,7 @@ const initialCategoryState: State = {
 		children: [],
 		isCreated: true,
 	},
+	inProgress: false,
 };
 
 const categorySlice = createSlice({
@@ -30,6 +32,7 @@ const categorySlice = createSlice({
 				parentId: parentId,
 			};
 			parentCategory.children = [...parentCategory.children, newCategory];
+			state.inProgress = true;
 		},
 		submitCategory: (
 			state,
@@ -38,6 +41,7 @@ const categorySlice = createSlice({
 			const category = findCategory(state.categories, payload.categoryId);
 			category.isCreated = true;
 			category.name = payload.categoryName;
+			state.inProgress = false;
 		},
 		removeCategory: (
 			state,
@@ -48,6 +52,7 @@ const categorySlice = createSlice({
 			parentCategory.children = parentCategory.children.filter(
 				(c: CategoryNode) => c.id !== payload.categoryId
 			);
+			state.inProgress = false;
 		},
 		editCategory: (
 			state,
@@ -59,7 +64,6 @@ const categorySlice = createSlice({
 				newName: string;
 			}>
 		) => {
-			const parentCategory = findCategory(state.categories, payload.parentId);
 			const category = findCategory(state.categories, payload.categoryId);
 			category.isCreated = false;
 		},
