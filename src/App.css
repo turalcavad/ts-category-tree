@@ -1,15 +1,24 @@
-.container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	gap: 0.5em;
-}
-
 body {
 	font-family: Calibri, Segoe, "Segoe UI", "Gill Sans", "Gill Sans MT",
 		sans-serif;
 	background-color: #f5f7fb;
+	overflow: hidden;
+}
+
+.container {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	cursor: move;
+	user-select: none;
+	transition: all cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.recenter {
+	top: 50% !important;
+	left: 50% !important;
+	transform: translate(-50%, -50%) !important;
 }
 
 input {
@@ -29,6 +38,8 @@ input {
 }
 .sub {
 	background-color: blue;
+	color: #fff;
+	font-weight: 600;
 }
 
 .tree,
