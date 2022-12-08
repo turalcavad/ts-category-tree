@@ -1,9 +1,9 @@
 import React from "react";
-import { CategoryNode } from "../../data";
+import { CategoryNode } from "../../models/category";
 import { categoryActions } from "../../store/categorySlice";
 import { useState } from "react";
 import CategoryActions from "../CategoryActions";
-import { useAppDispatch } from "../../hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import CreationActions from "../CreationActions";
 
 const Category: React.FC<CategoryNode> = ({
@@ -14,9 +14,11 @@ const Category: React.FC<CategoryNode> = ({
 	parentId,
 }: CategoryNode) => {
 	const dispatch = useAppDispatch();
+	const inProgress: boolean = useAppSelector((state) => state.inProgress);
 	const [categoryName, setCategoryName] = useState<string>("");
 
 	const addCategoryHandler = () => {
+		if (inProgress) return;
 		dispatch(categoryActions.addCategory(id));
 	};
 
@@ -29,9 +31,9 @@ const Category: React.FC<CategoryNode> = ({
 			{!isCreated ? (
 				<div className="category">
 					<input
+						autoFocus
 						type="text"
 						defaultValue={name}
-						autoFocus
 						onChange={inputHandler}
 					/>
 					<CreationActions
