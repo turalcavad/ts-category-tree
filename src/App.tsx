@@ -1,25 +1,18 @@
 import "./App.css";
 import { CategoryNode } from "./data";
-import { useSelector } from "react-redux";
 import Category from "./components/Category";
+import classes from "./components/Category/index";
+import { useAppSelector } from "./hooks";
 
 function App() {
-	const data: CategoryNode = useSelector((state) => state as CategoryNode);
+	const data: CategoryNode = useAppSelector((state) => state.categories);
 	console.log(data);
 	return (
 		<div className="container">
-			<Category {...data} />
+			<ul className="tree">
+				<Category {...data} />
+			</ul>
 		</div>
-		// <div className="container">
-		// 	<div className="category-header">
-		// 		Categories
-		// 		<button>add</button>
-		// 	</div>
-		// 	<div className="category-header">
-		// 		Categories
-		// 		<button>add</button>
-		// 	</div>
-		// </div>
 	);
 }
 

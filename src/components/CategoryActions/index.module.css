@@ -1,0 +1,17 @@
+.icon {
+	background-color: #c8d0da;
+	border-radius: 50%;
+	border: 1px solid grey;
+	font-size: 14px;
+	color: white;
+	display: flex;
+	cursor: pointer;
+}
+
+.wrapper {
+	position: absolute;
+	display: flex;
+	gap: 5px;
+	bottom: 15%;
+	left: 105%;
+}
