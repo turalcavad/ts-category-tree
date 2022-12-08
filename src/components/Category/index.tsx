@@ -1,9 +1,9 @@
 import React from "react";
 import { CategoryNode } from "../../data";
 import { categoryActions } from "../../store/categorySlice";
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import CategoryActions from "../CategoryActions";
-import { useAppDispatch, useAppSelector } from "../../hooks";
+import { useAppDispatch } from "../../hooks";
 import CreationActions from "../CreationActions";
 
 const Category: React.FC<CategoryNode> = ({
@@ -28,10 +28,15 @@ const Category: React.FC<CategoryNode> = ({
 		<li>
 			{!isCreated ? (
 				<div className="category">
-					<input type="text" value={name} onChange={inputHandler} />
+					<input
+						type="text"
+						defaultValue={name}
+						autoFocus
+						onChange={inputHandler}
+					/>
 					<CreationActions
 						categoryId={id}
-						categoryName={categoryName}
+						categoryName={categoryName === "" ? name : categoryName}
 						parentId={parentId}
 					/>
 				</div>

@@ -4,7 +4,6 @@ import ClearIcon from "@mui/icons-material/Clear";
 import CheckIcon from "@mui/icons-material/Check";
 import { useAppDispatch } from "../../hooks";
 import { categoryActions } from "../../store/categorySlice";
-import { CategoryNode } from "../../data";
 
 type Props = {
 	categoryId: number;

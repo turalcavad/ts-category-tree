@@ -51,8 +51,15 @@ const categorySlice = createSlice({
 		},
 		editCategory: (
 			state,
-			{ payload }: PayloadAction<{ categoryId: number; newName: string }>
+			{
+				payload,
+			}: PayloadAction<{
+				categoryId: number;
+				parentId: number;
+				newName: string;
+			}>
 		) => {
+			const parentCategory = findCategory(state.categories, payload.parentId);
 			const category = findCategory(state.categories, payload.categoryId);
 			category.isCreated = false;
 		},
