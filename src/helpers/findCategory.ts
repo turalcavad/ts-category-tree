@@ -1,4 +1,4 @@
-import { CategoryNode } from "../data";
+import { CategoryNode } from "../models/category";
 
 export const findCategory = (obj: CategoryNode, id: number) => {
 	return findCategoryRec([obj], id);

@@ -19,7 +19,7 @@ const Header: React.FC<Props> = ({ setRecenter, setZoomValue, zoomValue }) => {
 
 	return (
 		<header className={classes.header}>
-			<div className="left">
+			<div>
 				<h1>Services</h1>
 			</div>
 

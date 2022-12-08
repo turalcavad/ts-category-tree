@@ -1,4 +1,4 @@
-import { CategoryNode } from "../../data";
+import { CategoryNode } from "../../models/category";
 
 interface FuncProp {
 	addCategoryHandler: Function;
